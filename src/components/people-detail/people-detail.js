@@ -5,7 +5,7 @@ import Spinner from "../spinner";
 import "./people-detail.css";
 
 export default class PeopleDetail extends Component {
-  SwapiService = new SwapiService();
+  swapiService = new SwapiService();
 
   state = {
     person: null,
@@ -27,7 +27,7 @@ export default class PeopleDetail extends Component {
     if (!personId) {
       return;
     }
-    this.SwapiService.getPerson(personId)
+    this.swapiService.getPerson(personId)
       .then((person) => {
         this.setState({
           person,

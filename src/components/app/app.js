@@ -10,7 +10,7 @@ import RamdomPlanet from '../random-planet';
 import './app.css'
 
 export default class App extends Component {
-  SwapiService = new SwapiService();
+  swapiService = new SwapiService();
 
   state = {
     
@@ -26,8 +26,10 @@ export default class App extends Component {
 
         <div className="data-panel row mb2">
           <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected}
-              getData={this.SwapiService.getAllPlanets}/>
+            <ItemList
+              onItemSelected={this.onPersonSelected}
+              getData={this.swapiService.getAllPlanets}
+              renderItem={(item) => item.name } />
           </div>
           <div className="col-md-6">
             <PeopleDetail personId={ this.state.selectedPerson}/>

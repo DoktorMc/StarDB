@@ -6,8 +6,17 @@ import PeopleDetail from "../people-detail";
 
 import './people-page.css';
 
+const Row = ({ left, rigth }) => {
+  return (
+    <div className="data-panel row mb2">
+      <div className="col-md-6">{left}</div>
+      <div className="col-md-6">{rigth}</div>
+    </div>
+  );
+}
+ 
 export default class PeoplePage extends Component{
-  SwapiService = new SwapiService();
+  swapiService = new SwapiService();
 
   state = {
     selectedPerson: 1,
@@ -23,18 +32,21 @@ export default class PeoplePage extends Component{
       return <ErrorIndicator/>
     }
 
+    const itemList = (
+      <ItemList
+        onItemSelected={this.onPersonSelected}
+        getData={this.swapiService.getAllPeople}
+        renderItem={({ name, gender, birthYear }) =>
+          `${name} (${gender}, ${birthYear})`
+        }
+      />
+    );
+
+    const personDetails = (
+      <PeopleDetail personId={this.state.selectedPerson} />
+    );
     return (
-      <div className="data-panel row mb2">
-        <div className="col-md-6">
-          <ItemList
-            onItemSelected={this.onPersonSelected}
-            getData={this.SwapiService.getAllPeople}
-          />
-        </div>
-        <div className="col-md-6">
-          <PeopleDetail personId={this.state.selectedPerson} />
-        </div>
-      </div>
+      <Row left={itemList} rigth={personDetails} />
     );
   }
 }
