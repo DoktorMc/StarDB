@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import Spinner from "../spinner";
 
-
 import "./item-list.css";
 
 export default class ItemList extends Component {
-
   state = {
     itemList: null,
     error: false,
@@ -13,7 +11,6 @@ export default class ItemList extends Component {
   };
 
   componentDidMount() {
-
     const { getData } = this.props;
 
     getData().then((itemList) => {
@@ -33,7 +30,8 @@ export default class ItemList extends Component {
   renderItems(arr) {
     return arr.map((item) => {
       const { id } = item;
-      const label = this.props.renderItem(item)
+      const label = this.props.children(item);
+
       return (
         <li
           className="list-group-item"
